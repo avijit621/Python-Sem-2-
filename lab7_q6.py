@@ -62,8 +62,8 @@ class Polynomial:
         for i in range(1, len(self.coef_co)):
             # The derivative formula of the polynomial [x^n becomes x^(n-1)]
             derivative_coef.append((i) * self.coef_co[i])
-        self.coef_co = derivative_coef
-        return self
+        #self.coef_co = derivative_coef
+        return Polynomial(derivative_coef)
 
     def get_coef(self):
         coef=[]
@@ -79,14 +79,7 @@ class Polynomial:
             # integration formula of a polynomial [x^n becomes  x^n/n+1]
             Integration_coef.append(self.coef_co[i] / (i + 1))
         p = Polynomial(Integration_coef)  # Creating a polynomial with the co-efficients
-        return "Area in the interval " + str([self.a, self.b]) + " is: " + str((p[self.b] - p[self.a]))
-
-    def get_power(self,degree):
-          p=Polynomial(self.coef_co)
-          q=Polynomial([1])
-          for i in range(degree):
-              q*=p
-          return q   
+        return "Area in the interval " + str([self.a, self.b]) + " is: " + str((p[self.b] - p[self.a])) 
 
 
 
@@ -108,14 +101,19 @@ class Polynomial:
                angle = random.uniform(0, np.pi*2)
                root = complex(radius * np.cos(angle), radius * np.sin(angle))
                roots.append(root)
-        #print(roots)
-        
+        iteration=0
+        while iteration <10:
+           
+            for i  in range(len(roots)):
+                ratio = p[roots[i]]/ dp[roots[i]]
+                offset = ratio / (1 - (ratio * sum(1/(roots[i] - j) 
+                                  for j in(roots) if j != roots[i])))
+              
+                roots[i] -= offset
+            iteration += 1
+        print(roots)    
 
 
 
-p=Polynomial([1,1])
-p.get_power(3)
 q=Polynomial()
 q.Aberth([0,1,-1])   
-#q=Polynomial([1,1,1])
-#print(q.coef())  
