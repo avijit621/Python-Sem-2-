@@ -28,7 +28,7 @@ def Newton_system(F, J, x, eps):
     
     plt.show()
  
- def F(x):
+def F(x):
         return np.array(
             [3*x[0]-cos(x[1]*x[2])-3/2,
                 4*x[0]**2 -625*x[1]**2 + 2*x[2]-1, 20*x[2]+exp(-x[0]*x[1]) +9 ])
@@ -38,5 +38,5 @@ def J(x):
             [[3,x[2]*sin(x[1]*x[2]),x[1]*sin(x[1]*x[2])],
              [8*x[0],-1250*x[1],2],[-x[1]*exp(-x[1]*x[0]),-x[0]*exp(-x[1]*x[0]),20]])
 
-Newton_system(F, J, x=np.array([1,2,3]), eps=0.0001)
+Newton_system(F, J, x=np.array([1,2,3]), eps=0.000001)
 
