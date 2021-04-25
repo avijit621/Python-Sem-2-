@@ -62,8 +62,8 @@ class Polynomial:
         for i in range(1, len(self.coef_co)):
             # The derivative formula of the polynomial [x^n becomes x^(n-1)]
             derivative_coef.append((i) * self.coef_co[i])
-        self.coef_co = derivative_coef
-        return self
+        #self.coef_co = derivative_coef
+        return Polynomial(derivative_coef)
 
     def get_coef(self):
         coef=[]
@@ -100,8 +100,8 @@ class Polynomial:
         
         coef=p.get_coef()
         degree=len(coef)-1
-        p1=Polynomial(coef)
-        dp=p1.derivative()
+        
+        dp=p.derivative()
        
         roots=[]    
         '''
@@ -136,7 +136,7 @@ class Polynomial:
             iteration+=1
             #print(iteration,roots)     
             
-        print(roots)  
+        print("The roots are ",roots)  
                                 
 
 q=Polynomial()
