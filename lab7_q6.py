@@ -64,7 +64,7 @@ class Polynomial:
             derivative_coef.append((i) * self.coef_co[i])
         #self.coef_co = derivative_coef
         return Polynomial(derivative_coef)
-
+     # a method to find the coeffecients of the polynomial
     def get_coef(self):
         coef=[]
         for i in self.coef_co:
@@ -85,24 +85,29 @@ class Polynomial:
 
     def Aberth(self,array):
         self.array=array 
+        # creating a polynomial out of the given array elemnts
         p=Polynomial([1])
         for i in self.array:
             p=p*Polynomial([-i,1])
-        #print(p)
-        coef=p.get_coef()
-        degree=len(coef)-1
+    
+        coef=p.get_coef() 
+        degree=len(coef)-1 # getting degree of the Polynomial 
         dp=p.derivative()
-        #print(degree)
+        # suitable upper and lowerbounds to start Aberth's method
         upper = 1 + 1 / abs(coef[-1]) * max(abs(coef[x]) for x in range(degree))
         lower = abs(coef[0]) / (abs(coef[0]) + max(abs(coef[x]) for x in range(1, degree + 1)))
+        # Starting the ABerth method by randomly choosing an estiamate for the roots
+        # inside the bounds
         roots=[]
+        
         for i in range(degree):
                radius = random.uniform(lower, upper)
                angle = random.uniform(0, np.pi*2)
                root = complex(radius * np.cos(angle), radius * np.sin(angle))
                roots.append(root)
         iteration=0
-        while iteration <10:
+        # calculation for Abeth's method
+        while iteration <1000:
            
             for i  in range(len(roots)):
                 ratio = p[roots[i]]/ dp[roots[i]]
@@ -111,7 +116,7 @@ class Polynomial:
               
                 roots[i] -= offset
             iteration += 1
-        print(roots)    
+        print("The estimated roots are :",roots)    
 
 
 
