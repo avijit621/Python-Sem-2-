@@ -104,6 +104,7 @@ class Polynomial:
         dp=p1.derivative()
        
         roots=[]    
+        '''
         x=(abs(coef[0])/abs(coef[-1]))**(1/degree)
         
         for i in range (degree):
@@ -113,7 +114,15 @@ class Polynomial:
 
         print(roots)
 
-       
+       '''
+        upper = 1 + 1 / abs(coef[-1]) * max(abs(coef[x]) for x in range(degree))
+        lower = abs(coef[0]) /  (abs(coef[0]) + max(abs(coef[x]) for x in range(1, degree + 1)))
+        roots=[]
+        for i in range(degree):
+               radius = random.uniform(lower, upper)
+               angle = random.uniform(0, np.pi*2)
+               root = complex(radius * np.cos(angle), radius * np.sin(angle))
+               roots.append(root)
         
         iteration=0
         while iteration<10:    
@@ -125,10 +134,10 @@ class Polynomial:
                   #print("Offest",offset)                        
                   roots[i]-=offset
             iteration+=1
-            print(iteration,roots)     
+            #print(iteration,roots)     
             
         print(roots)  
                                 
 
 q=Polynomial()
-q.Aberth([1,0,-1])   
+q.Aberth([1,2,-1])   
